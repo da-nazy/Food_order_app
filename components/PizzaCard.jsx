@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from   "next/image";
 import styles from "../styles/PizzaCard.module.css";
-function PizzaCard() {
+const PizzaCard=({pizza})=>{
   return (
     <div className={styles.container}>
-       <Image src="/img/pizza.png" alt="" width="500" height="500"/>
+       <Image src={pizza.img} alt="" width="500" height="500"/>
     <h1 className={styles.title}>
-        FIORA DI ZUCCA
+        {pizza.title}
     </h1>
     <span className={styles.price}>
         $19.90
