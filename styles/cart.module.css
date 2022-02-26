@@ -51,7 +51,9 @@
     font-weight:bold;
     cursor: pointer;
     margin-top:20px;
-    width:90%;
+    width:100%;
+    margin-bottom:5px;
+   
 }
 
 @media  screen and (max-width:480px) {
@@ -103,4 +105,19 @@
     .wrapper{
         width:100%;
     }
+}
+
+.paymentMethods{
+    margin-top:10px;
+    display: flex;
+    flex-direction:column;
+}
+.payButton{
+padding:5px 5px;
+cursor:pointer;
+margin-bottom: 5px;
+background-color: white;
+color:teal;
+font-weight: bold;
+border:1px solid #fff;
 }
