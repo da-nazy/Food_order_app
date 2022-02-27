@@ -27,7 +27,7 @@ export default async function hanler(req,res){
     }
 
 
-    // delee method
+// delete method
 if(method==="DELETE"){
     try{
        const product = await Product.create(req.body);

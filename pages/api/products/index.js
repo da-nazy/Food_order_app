@@ -27,4 +27,3 @@ export default async function hanler(req,res){
     }
 }
 
-// time : 0.32.15
