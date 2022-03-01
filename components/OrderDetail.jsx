@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import styles from "../styles/OrderDetail.module.css";
-export default function OrderDetail() {
+export default function OrderDetail({total,createOrder}) {
       
     const [customer,setCustomer]=useState("");
     const [address,setAddress]=useState("");
     const [phone,setPhone]=useState("");
 
     const handleClick=()=>{
-
+      createOrder({Customer:customer,address,total,method:0})
     }
     return (
     <div className={styles.container}>
@@ -41,4 +41,3 @@ export default function OrderDetail() {
     </div>
   )
 }
-// time 1:32:34

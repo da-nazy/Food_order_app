@@ -19,7 +19,11 @@ function Navbar() {
       </div>
       <div className={styles.item}>
         <ul className={styles.list}>
-          <li className={styles.listItem}>HomePage</li>
+         
+         <Link href="/" passHref>
+         <li className={styles.listItem}>HomePage</li>
+         </Link>
+         
           <li className={styles.listItem}>Products</li>
           <li className={styles.listItem}>Menu</li>
           <Image src="/img/logo.png" alt=""  width="160px" height="69px"/>
