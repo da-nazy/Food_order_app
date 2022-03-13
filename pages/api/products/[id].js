@@ -30,8 +30,8 @@ export default async function hanler(req,res){
 // delete method
 if(method==="DELETE"){
     try{
-       const product = await Product.create(req.body);
-       res.status(201).json({payload:product})
+       await Product.findByIdAndDelete(id);
+       res.status(200).json(`Product with ${id} had been deleted!`);
     }catch(err){
         res.status(500).json(err)
     }

@@ -1,8 +1,31 @@
-import React from 'react'
+import React,{useState} from 'react'
 import  Image from "next/image"
 import styles from "../../styles/Admin.module.css"
 import axios from 'axios'
-export default function index({orders,products}) {
+export default function Index({orders,products}) {
+  const[pizzaList,setPizzaList]=useState(products);
+  const[orderList,setorderList]=useState(orders);
+  const status=["preparing","on the way","delivered"];
+  const handleDelete=async(id)=>{
+    
+    try{
+   const res=await axios.delete("http://localhost:3000/api/products/"+id);
+   setPizzaList(pizzaList.filter((pizza)=>pizza._id!==id));
+    }catch(err){
+      console.log(err);
+    }
+  }
+  const handleStatus=async(id)=>{
+    const item=orderList.filter(order=>order._id===id)[0];
+    const currentStatus=item.status;
+
+    try{
+     const res=await axios.put("http://localhost:3000/orders/"+id,{status:currentStatus+1 });
+    setorderList([res.data])
+    }catch(err){
+      console.log(err)
+    }
+  }
   return (
     <div className={styles.container}>
     <div className={styles.item}>
@@ -17,30 +40,30 @@ export default function index({orders,products}) {
              <th>Action</th>
         </tr>    
          </tbody> 
-
-         <tbody>
-             {products.map(prodct=>(
-
-             )}
+         {pizzaList.map((product)=>(
+         <tbody key={product._id}>
+   
          <tr className={styles.trTitle}>
              <td>
                  <Image 
-                 src="/img/pizza.png"
+                 src={product.img}
                  width={50}
                  height={50}
                  objectFits="cover"
                  alt=""
                  />
              </td>
-             <td>PizzaId</td>
-             <td>Pizza Title</td>
-             <td>$50</td>
+             <td>{product._id.slice(0,5)}...</td>
+             <td>{product.title}</td>
+             <td>${product.prices[0]}</td>
              <td>
                <button className={styles.button}>Edit</button> 
-               <button className={styles.button}>Delete</button>
+               <button className={styles.button} onClick={()=>handleDelete(product._id)}>Delete</button>
              </td>
-        </tr>    
-         </tbody> 
+        </tr>   
+        </tbody> 
+             ))}
+
 
         </table>
     </div>
@@ -57,22 +80,23 @@ export default function index({orders,products}) {
              <th>Action</th>
         </tr>    
          </tbody> 
-
-         <tbody>
-         <tr className={styles.trTitle}>
-             <td>
-               {" 8921379812379127".slice(0,5)}...
-             </td>
-             <td>John Doe</td>
-             <td>$50</td>
-             <td>paid</td>
-             <td>Preparing</td>
-
-             <td>
-               <button >Next Stage</button> 
-            </td>
-        </tr>    
+         {orderList.map((order)=>{
+   return <tbody key={order._id}>
+   <tr className={styles.trTitle}>
+     <td>
+       {order._id.slice(0,5)}...
+     </td>
+     <td>{order.customer}</td>
+     <td>${order.total}</td>
+     <td><span>{order.method===0?"cash":"paid"}</span></td>
+     <td>{status[order.status]}</td>
+     <td>
+       <button onClick={()=>handleStatus(order._id)}>Next Stage</button> 
+    </td>
+      </tr>    
          </tbody> 
+         })}
+        
 
         </table>
     </div>
@@ -80,13 +104,14 @@ export default function index({orders,products}) {
   )
 }
 export const getServerSideProps=async()=>{
-    const productRes=await axios.get("http://localhost3000/api/products");
+    const productRes=await axios.get("http://localhost:3000/api/products");
     const orderRes =await axios.get("http://localhost:3000/api/orders")
+   
     return{
         props:{
             orders:orderRes.data,
-            pizzas:productRes.data,
+            products:productRes.data.payload,
         }
     }
 }
-//time 1:50:40
+//time 2:01:28
