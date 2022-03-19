@@ -19,7 +19,15 @@ const handler =async (req,res)=>{
       }
     }
     if(method==="PUT"){
-
+      try{
+        // product will update but won't return the newest version to prevent that we use
+       // new:true,
+       const order = await Order.findByIdAndUpdate(id,req.body,{new:true});
+     
+       res.status(209).json(order);
+          }catch(err){
+        res.status(500).json(err);
+          }
     }
     if(method==="DELETE"){
 
@@ -27,3 +35,5 @@ const handler =async (req,res)=>{
 }
 
 export default handler;
+
+// clip time 2:03:51
