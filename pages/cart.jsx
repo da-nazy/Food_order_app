@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import {reset} from "../redux/cartSlice";
 import OrderDetail from '../components/OrderDetail';
 
-function cart() {
+function Cart() {
     const [open,setOpen]=useState(false);
     const [cash,setCash]=useState(false);
     const dispatch=useDispatch();
@@ -189,4 +189,4 @@ function cart() {
   )
 }//time 1:24:50
 
-export default cart
+export default Cart
