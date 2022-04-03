@@ -15,7 +15,7 @@ function Product({pizza}) {
   const changePrice=(number)=>{
    setPrice(price+number);
    console.log(price)
-  }
+  }  
 const handleSize=(sizeIndex)=>{
 const difference=pizza.prices[sizeIndex]-pizza.prices[size];
 setSize(sizeIndex);
