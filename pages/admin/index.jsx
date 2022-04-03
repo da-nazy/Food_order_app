@@ -6,8 +6,8 @@ export default function Index({orders,products}) {
   const[pizzaList,setPizzaList]=useState(products);
   const[orderList,setorderList]=useState(orders);
   const status=["preparing","on the way","delivered"];
+ 
   const handleDelete=async(id)=>{
-    
     try{
    const res=await axios.delete("http://localhost:3000/api/products/"+id);
    setPizzaList(pizzaList.filter((pizza)=>pizza._id!==id));
@@ -15,17 +15,23 @@ export default function Index({orders,products}) {
       console.log(err);
     }
   }
+
   const handleStatus=async(id)=>{
+    
     const item=orderList.filter(order=>order._id===id)[0];
     const currentStatus=item.status;
-
+    console.log(item);
     try{
-     const res=await axios.put("http://localhost:3000/orders/"+id,{status:currentStatus+1 });
-    setorderList([res.data])
+     const res=await axios.put("http://localhost:3000/api/orders/"+id,{status:currentStatus+1 });
+    setorderList([res.data,
+        ...orderList.filter(order=>order._id!==id),
+    ])
     }catch(err){
       console.log(err)
     }
   }
+
+
   return (
     <div className={styles.container}>
     <div className={styles.item}>
@@ -80,11 +86,12 @@ export default function Index({orders,products}) {
              <th>Action</th>
         </tr>    
          </tbody> 
-         {orderList.map((order)=>{
-   return <tbody key={order._id}>
+         {orderList.map((order,i)=>{
+   return <tbody key={i}>
    <tr className={styles.trTitle}>
      <td>
-       {order._id.slice(0,5)}...
+       {console.log(order?._id?.slice(0,5))}
+       {order?._id?.slice(0,5)}...
      </td>
      <td>{order.customer}</td>
      <td>${order.total}</td>
@@ -103,10 +110,19 @@ export default function Index({orders,products}) {
     </div>
   )
 }
-export const getServerSideProps=async()=>{
+export const getServerSideProps=async(ctx)=>{
+  const myCookie=ctx.req?.cookies||"";
+  if(myCookie.token!==process.env.TOKEN){
+    return {
+      redirect:{
+        destination:"/admin/login",
+        permanent:false,
+      }
+    }
+  }
     const productRes=await axios.get("http://localhost:3000/api/products");
     const orderRes =await axios.get("http://localhost:3000/api/orders")
-   
+    console.log(orderRes);
     return{
         props:{
             orders:orderRes.data,
@@ -114,4 +130,3 @@ export const getServerSideProps=async()=>{
         }
     }
 }
-//time 2:01:28

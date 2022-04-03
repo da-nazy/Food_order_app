@@ -76,9 +76,6 @@ const handleChange=(e,option)=>{
              <label htmlFor={option.text}>{option.text}</label>
            </div>
            )}
-          
-         
-     
         </div>
         <div className={styles.add}>
           <input 

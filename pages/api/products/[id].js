@@ -7,7 +7,7 @@ export default async function hanler(req,res){
 
     const {method,query:{id}}=req;
     dbConnect();
-
+    
     if(method==="GET"){
         try{
          const product= await Product.findById(id);
