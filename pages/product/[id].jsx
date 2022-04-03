@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../../styles/Product.module.css";
-import Image from "next/Image";
+import Image from "next/image";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
