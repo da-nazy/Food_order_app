@@ -1,12 +1,19 @@
+<<<<<<< HEAD
 import styles from '../../styles/Login.module.css';
 import React,{useState} from 'react';
 import {useRouter} from "next/router";
 import Link from "next/link";
 import axios from 'axios';
+=======
+import React,{useState} from 'react'
+import { useRouter } from 'next/router';
+import styles from "../../styles/Login.module.css"
+>>>>>>> fb01310dae0b5e54cc66e56d46bcfba2b62b2c60
 export default function Login() {
     const [username,setUsername]=useState(null);
     const [password,setPassword]=useState(null);
     const [error,setError]=useState(false);
+<<<<<<< HEAD
     const router=useRouter();
     const handleClick=async()=>{
       try{
@@ -46,3 +53,11 @@ export default function Login() {
   )
 }
 //00:38:51
+=======
+      const router=useRouter();
+  return (
+    <div className={styles.container}>Login</div>
+  )
+}
+//time 2:11:07
+>>>>>>> fb01310dae0b5e54cc66e56d46bcfba2b62b2c60

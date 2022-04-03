@@ -1,4 +1,5 @@
 .container{
+<<<<<<< HEAD
  height:calc(100vh - 100px);
  display: flex;
  align-items: center;
@@ -27,4 +28,7 @@
  .wrapper .error{
     font-size: 13px;
     color:red;
+=======
+    
+>>>>>>> fb01310dae0b5e54cc66e56d46bcfba2b62b2c60
 }

@@ -31,5 +31,27 @@ export default async function hanler(req,res){
           res.status(500).json(err)
       }
     }
+
+    if(method==="PUT"){
+        try{
+      // product will update but won't return the newest version to prevent that we use
+     // new:true,
+     const product = await Product.findByIdAndUpdate(id,req.body,{new:true});
+   
+     res.status(201).json(product);
+        }catch(err){
+      res.status(500).json(err);
+        }
+    }
+
+    if(method==="DELETE"){
+        try{
+
+        }catch(err){
+
+        }
+    }
 }
+
+
 
