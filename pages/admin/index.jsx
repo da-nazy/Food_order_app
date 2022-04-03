@@ -22,17 +22,9 @@ export default function Index({orders,products}) {
     const currentStatus=item.status;
     console.log(item);
     try{
-<<<<<<< HEAD
      const res=await axios.put("http://localhost:3000/api/orders/"+id,{status:currentStatus+1 });
     setorderList([res.data,
         ...orderList.filter(order=>order._id!==id),
-=======
-     const res=await axios.put("http://localhost:3000/api/orders/"+id,
-     {status:currentStatus+1 });
-    setorderList([
-      res.data,
-      ...orderList.filter(order=>order._id!==id),
->>>>>>> fb01310dae0b5e54cc66e56d46bcfba2b62b2c60
     ])
     }catch(err){
       console.log(err)
