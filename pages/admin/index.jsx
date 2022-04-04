@@ -9,7 +9,7 @@ export default function Index({orders,products}) {
  
   const handleDelete=async(id)=>{
     try{
-   const res=await axios.delete("http://localhost:3000/api/products/"+id);
+   const res=await axios.delete(`${process.env.host}/api/products/`+id);
    setPizzaList(pizzaList.filter((pizza)=>pizza._id!==id));
     }catch(err){
       console.log(err);
@@ -22,7 +22,7 @@ export default function Index({orders,products}) {
     const currentStatus=item.status;
     console.log(item);
     try{
-     const res=await axios.put("http://localhost:3000/api/orders/"+id,{status:currentStatus+1 });
+     const res=await axios.put(`${process.env.host}/api/orders/`+id,{status:currentStatus+1 });
     setorderList([res.data,
         ...orderList.filter(order=>order._id!==id),
     ])

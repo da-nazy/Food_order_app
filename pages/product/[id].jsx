@@ -11,7 +11,6 @@ function Product({pizza}) {
   const [quantity,setQuantity]=useState(1)
   // dispatch
   const dispatch=useDispatch();
-
   const changePrice=(number)=>{
    setPrice(price+number);
    console.log(price)
@@ -21,7 +20,7 @@ const difference=pizza.prices[sizeIndex]-pizza.prices[size];
 setSize(sizeIndex);
 changePrice(difference);
 }
-
+ 
 const handleChange=(e,option)=>{
   const checked=e.target.checked;
   console.log(option.price);
@@ -92,7 +91,9 @@ const handleChange=(e,option)=>{
 }
 // our header params which is id
 export const getServerSideProps =async ({params})=>{
-  const res= await axios.get(`http://localhost:3000/api/products/${params.id}`);
+  // for production ${process.env.VERCEL_URL}
+  // local http://localhost:3000
+  const res= await axios.get(`${process.env.host}/api/products/${params.id}`);
 return{
   props:{
     pizza:res.data.payload

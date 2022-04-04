@@ -40,7 +40,7 @@ export default function Add({setClose}) {
         img:url
       };
 
-      await axios.post('http://localhost:3000/api/products',newProduct,{withCredentials: true});
+      await axios.post(`${process.env.host}/api/products`,newProduct,{withCredentials: true});
       setClose(false);
         
      }catch(err){
