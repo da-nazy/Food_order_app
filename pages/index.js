@@ -8,7 +8,6 @@ import Add from '../components/Add';
 import AddButton from '../components/AddButton';
 export default function Home({pizzaList,admin,myCookie}) {
    const [close,setClose]=useState(false);
-   console.log("this is admin",myCookie.token)
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +26,7 @@ export default function Home({pizzaList,admin,myCookie}) {
 export const getServerSideProps =async (ctx)=>{
   const myCookie=ctx.req?.cookies||"";
   let admin="";
-  console.log(myCookie.token,process.env.TOKEN)
+ 
   if(myCookie.token!==process.env.TOKEN){
     admin=false;
   }else{
