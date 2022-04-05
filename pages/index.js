@@ -34,6 +34,7 @@ export const getServerSideProps =async (ctx)=>{
     admin=true;
   }
   const res= await axios.get(`${process.env.host}/api/products`);
+
 return{
   props:{
     pizzaList:res.data.payload,

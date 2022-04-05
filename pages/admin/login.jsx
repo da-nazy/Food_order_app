@@ -3,19 +3,20 @@ import React,{useState} from 'react';
 import {useRouter} from "next/router";
 import Link from "next/link";
 import axios from 'axios';
-export default function Login() {
+export default function Login({url}) {
     const [username,setUsername]=useState(null);
     const [password,setPassword]=useState(null);
     const [error,setError]=useState(false);
     const router=useRouter();
     const handleClick=async()=>{
       try{
-  await axios.post(`${process.env.host}/api/login`,{
+        
+  const data=  await axios.post(`${url}/api/login`,{
     username,password
   });
    router.push("/admin");
   
-   console.log(router);
+  
       }catch(err){
         console.log(err.message);
         setError(true)
@@ -45,4 +46,12 @@ export default function Login() {
     </div>
   )
 }
-//00:38:51
+
+export const getServerSideProps=async()=>{
+  let url=process.env.host;
+  return{
+    props:{
+      url
+    }
+  }
+}

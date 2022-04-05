@@ -2,14 +2,14 @@ import React,{useState} from 'react'
 import  Image from "next/image"
 import styles from "../../styles/Admin.module.css"
 import axios from 'axios'
-export default function Index({orders,products}) {
+export default function Index({orders,products,url}) {
   const[pizzaList,setPizzaList]=useState(products);
   const[orderList,setorderList]=useState(orders);
   const status=["preparing","on the way","delivered"];
  
   const handleDelete=async(id)=>{
     try{
-   const res=await axios.delete(`${process.env.host}/api/products/`+id);
+   const res=await axios.delete(`${url}/api/products/`+id);
    setPizzaList(pizzaList.filter((pizza)=>pizza._id!==id));
     }catch(err){
       console.log(err);
@@ -22,7 +22,7 @@ export default function Index({orders,products}) {
     const currentStatus=item.status;
     console.log(item);
     try{
-     const res=await axios.put(`${process.env.host}/api/orders/`+id,{status:currentStatus+1 });
+     const res=await axios.put(`${url}/api/orders/`+id,{status:currentStatus+1 });
     setorderList([res.data,
         ...orderList.filter(order=>order._id!==id),
     ])
@@ -122,11 +122,12 @@ export const getServerSideProps=async(ctx)=>{
   }
     const productRes=await axios.get(`${process.env.host}/api/products`);
     const orderRes =await axios.get(`${process.env.host}/api/orders`)
-    console.log(orderRes);
+    let url=process.env.host;
     return{
         props:{
             orders:orderRes.data,
             products:productRes.data.payload,
+            url
         }
     }
 }
