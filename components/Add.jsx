@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import styles from "../styles/Add.module.css";
 import axios from "axios";
 import { useRouter } from 'next/dist/client/router';
-export default function Add({setClose}) {
+export default function Add({setClose,appurl}) {
   const [file,setFile]=useState(null);
   const [title,setTitle]=useState(null);
   const [desc,setDesc]=useState(null);
@@ -40,7 +40,7 @@ export default function Add({setClose}) {
         img:url
       };
 
-      await axios.post(`${process.env.host}/api/products`,newProduct,{withCredentials: true});
+      await axios.post(`${appurl}/api/products`,newProduct,{withCredentials: true});
       setClose(false);
         
      }catch(err){
@@ -129,4 +129,12 @@ export default function Add({setClose}) {
     </div>
   )
 }
-//00:5:54
+    export const getServerSideProps =async ()=>{
+      let appurl=process.env.host;
+      return{
+        props:{
+          appurl
+        }
+      }
+    }
+
