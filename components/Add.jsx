@@ -9,7 +9,7 @@ export default function Add({setClose,appurl}) {
   const [prices,setPrices]=useState([]);
   const [extra,setExtra]=useState(null);
   const [extraOptions,setExtraOptions]=useState([]);
-    
+    console.log(appurl,"checking");
   
   const changePrice=(e,index)=>{
     const currentPrices=prices;
