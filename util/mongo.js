@@ -28,7 +28,6 @@ async function dbConnect() {
     const opts = {
       bufferCommands: false,
       useNewUrlParser: true, 
-      useUnifiedTopology: true ,
       serverSelectionTimeoutMS: 5000,
       autoIndex: false, // Don't build indexes
       maxPoolSize: 10, // Maintain up to 10 socket connections
