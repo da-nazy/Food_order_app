@@ -28,10 +28,10 @@ async function dbConnect() {
     const opts = {
       bufferCommands: false,
       useNewUrlParser: true, 
-      serverSelectionTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 5000,
       autoIndex: false, // Don't build indexes
       maxPoolSize: 10, // Maintain up to 10 socket connections
-      serverSelectionTimeoutMS: 10000, // Keep trying to send operations for 5 seconds
+      serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
       family: 4 
      
@@ -46,7 +46,7 @@ async function dbConnect() {
   connect();
    }catch(err){
 
-     console.log(err);
+     console.log(err.message);
    connect();
    }
   }
