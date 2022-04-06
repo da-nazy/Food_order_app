@@ -17,7 +17,7 @@ export default function Home({pizzaList,admin,myCookie}) {
       </Head>
       <Featured/>
       {admin&&<AddButton setClose={(e)=>setClose(e)}/>}
-      <PizzaList pizzaList={pizzaList}/>
+     {pizzaList&&<PizzaList pizzaList={pizzaList}/>}
       {close&&<Add setClose={(e)=>setClose(e)}/>}
     </div>
   )
