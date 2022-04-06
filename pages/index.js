@@ -8,7 +8,7 @@ import Add from '../components/Add';
 import AddButton from '../components/AddButton';
 export default function Home({pizzaList,admin,myCookie,url}) {
    const [close,setClose]=useState(false);
-   console.log(url)
+   
   return (
     <div className={styles.container}>
       <Head>
@@ -17,9 +17,9 @@ export default function Home({pizzaList,admin,myCookie,url}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured/>
-      {admin&&<AddButton appurl={url} setClose={(e)=>setClose(e)}/>}
+      {admin&&<AddButton  setClose={(e)=>setClose(e)}/>}
      {pizzaList&&<PizzaList pizzaList={pizzaList}/>}
-      {close&&<Add setClose={(e)=>setClose(e)}/>}
+      {close&&<Add appurl={url} setClose={(e)=>setClose(e)}/>}
     </div>
   )
 }
