@@ -47,7 +47,7 @@ async function dbConnect() {
    }catch(err){
 
      console.log(err);
-     setTimeout(connect,5000);
+   connect();
    }
   }
   cached.conn = await cached.promise
