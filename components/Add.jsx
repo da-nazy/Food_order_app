@@ -129,12 +129,5 @@ export default function Add({setClose,appurl}) {
     </div>
   )
 }
-    export const getServerSideProps =async ()=>{
-     
-      return{
-        props:{
-        
-        }
-      }
-    }
+
 

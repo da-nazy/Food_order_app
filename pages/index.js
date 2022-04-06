@@ -8,6 +8,7 @@ import Add from '../components/Add';
 import AddButton from '../components/AddButton';
 export default function Home({pizzaList,admin,myCookie,url}) {
    const [close,setClose]=useState(false);
+   console.log(url)
   return (
     <div className={styles.container}>
       <Head>
