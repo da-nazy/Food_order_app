@@ -130,10 +130,10 @@ export default function Add({setClose,appurl}) {
   )
 }
     export const getServerSideProps =async ()=>{
-      let appurl=process.env.host;
+     
       return{
         props:{
-          appurl
+        
         }
       }
     }

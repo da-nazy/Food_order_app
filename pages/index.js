@@ -6,7 +6,7 @@ import Featured from '../components/Featured';
 import PizzaList from '../components/PizzaList';
 import Add from '../components/Add';
 import AddButton from '../components/AddButton';
-export default function Home({pizzaList,admin,myCookie}) {
+export default function Home({pizzaList,admin,myCookie,url}) {
    const [close,setClose]=useState(false);
   return (
     <div className={styles.container}>
@@ -16,7 +16,7 @@ export default function Home({pizzaList,admin,myCookie}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured/>
-      {admin&&<AddButton setClose={(e)=>setClose(e)}/>}
+      {admin&&<AddButton appurl={url} setClose={(e)=>setClose(e)}/>}
      {pizzaList&&<PizzaList pizzaList={pizzaList}/>}
       {close&&<Add setClose={(e)=>setClose(e)}/>}
     </div>
@@ -33,12 +33,13 @@ export const getServerSideProps =async (ctx)=>{
     admin=true;
   }
   const res= await axios.get(`${process.env.host}/api/products`);
-
+  let url=process.env.host;
 return{
   props:{
     pizzaList:res.data.payload,
     admin,
-    myCookie
+    myCookie,
+    url
   }
 }
 }
