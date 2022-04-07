@@ -6,9 +6,27 @@ import Featured from '../components/Featured';
 import PizzaList from '../components/PizzaList';
 import Add from '../components/Add';
 import AddButton from '../components/AddButton';
-export default function Home({pizzaList,admin,myCookie,url}) {
+export default function Home({admin,myCookie,url}) {
    const [close,setClose]=useState(false);
+   const [pizza,setPizza]=useState(null);
    
+   const getPizza=()=>{
+     axios.get(`${url}/api/products`).then(function(data){
+        setPizza(data.data.payload);
+       
+     }).catch(function(error){
+     console.log(error)
+     })
+   }
+
+    useEffect(()=>{
+     if(!pizza){
+      getPizza();
+     }
+      console.log('test',pizza)
+    })
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,7 +36,7 @@ export default function Home({pizzaList,admin,myCookie,url}) {
       </Head>
       <Featured/>
       {admin&&<AddButton  setClose={(e)=>setClose(e)}/>}
-     {pizzaList&&<PizzaList pizzaList={pizzaList}/>}
+     {pizza&&<PizzaList pizzaList={pizza}/>}
       {close&&<Add appurl={url} setClose={(e)=>setClose(e)}/>}
     </div>
   )
@@ -33,11 +51,11 @@ export const getServerSideProps =async (ctx)=>{
   }else{
     admin=true;
   }
-  const res= await axios.get(`${process.env.host}/api/products`);
+ 
   let url=process.env.host;
 return{
   props:{
-    pizzaList:res.data.payload,
+ 
     admin,
     myCookie,
     url

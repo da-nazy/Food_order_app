@@ -6,13 +6,19 @@ export default async function hanler(req,res){
    
 
     const {method,query:{id}}=req;
-    dbConnect();
+    try{
+        dbConnect();
+    }catch(error){
+       dbConnect();
+    }
+    
     
     if(method==="GET"){
         try{
          const product= await Product.findById(id);
          res.status(200).json({payload:product})
         }catch(err){
+        
             res.status(500).json(err);
         }
     }

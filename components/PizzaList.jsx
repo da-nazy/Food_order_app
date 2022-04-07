@@ -2,7 +2,7 @@ import styles from '../styles/PizzaList.module.css';
 import React from 'react'
 import PizzaCard from './PizzaCard';
 function PizzaList({pizzaList}) {
- // console.log(pizzaList);
+  console.log(pizzaList);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}> THE BEST PIZZA IN TOWN</h1>
