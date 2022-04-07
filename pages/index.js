@@ -23,8 +23,8 @@ export default function Home({admin,myCookie,url}) {
      if(!pizza){
       getPizza();
      }
-      console.log('test',pizza)
-    })
+      
+    },[pizza,])
 
 
   return (
